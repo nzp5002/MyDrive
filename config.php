@@ -1,17 +1,14 @@
 <?php
 // 🔒 Segurança: não mostrar erros na tela
-ini_set('display_errors', 1);
+ini_set('display_errors', 0);
 error_reporting(E_ALL);
 
-// mysqli lança exceções
-mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-
-// sessão
+// 🛡️ Sessão
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// 🔐 controle de login
+// 🔐 Controle de login
 function checkLogin() {
     if (!isset($_SESSION['user_id'])) {
         header("Location: login");
@@ -19,18 +16,18 @@ function checkLogin() {
     }
 }
 
-// 📁 constantes
+// 📁 Constantes de upload
 define('UPLOAD_DIR', __DIR__ . '/uploads/');
 define('MAX_FILE_SIZE', 10 * 1024 * 1024); // 10MB
 
-// 🌐 valida DNS antes de conectar
+// 🌐 Valida host antes de conectar
 function hostValido($host) {
     if (empty($host)) return false;
     $ip = gethostbyname($host);
-    return $ip !== $host; // se não resolveu, retorna o próprio host
+    return $ip !== $host;
 }
 
-// ⚠️ página amigável de erro
+// ⚠️ Página amigável de erro
 function erroSistema() {
     http_response_code(500);
     die("
@@ -40,87 +37,67 @@ function erroSistema() {
     ");
 }
 
-// 🔌 conexão principal
+// 🔌 Conexão principal com PDO
 function connectDatabases() {
 
     // =========================
-    // 🔹 SERVER A (principal)
+    // 🔹 SERVER A (Railway)
     // =========================
-    $a_host = getenv("PDBH");
-    $a_user = getenv("PDBU");
-    $a_pass = getenv("dbpass");
-    $a_db   = getenv("banco");
-    $a_port = 23664;
+    $a_host = getenv("DB_HOST") ?: "mysql.railway.internal";
+    $a_user = getenv("DB_USER") ?: "root";
+    $a_pass = getenv("DB_PASS") ?: "xItvojBtrwUlQrIxlhLWRLrLUahvAZZL";
+    $a_db   = getenv("DB_NAME") ?: "railway";
+    $a_port = getenv("DB_PORT") ?: 3306;
 
     try {
-
-        // 🚫 evita erro DNS
         if (!hostValido($a_host)) {
-            throw new Exception("DNS inválido Server A: " . $a_host);
+            throw new Exception("Host inválido Server A: " . $a_host);
         }
 
-        $mysqli = mysqli_init();
+        $dsn = "mysql:host=$a_host;port=$a_port;dbname=$a_db;charset=utf8mb4";
+        $pdo = new PDO($dsn, $a_user, $a_pass, [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        ]);
 
-        // ⏱️ timeout
-        $mysqli->options(MYSQLI_OPT_CONNECT_TIMEOUT, 5);
-
-        // 🔐 SSL
-        $mysqli->ssl_set(NULL, NULL, __DIR__ . "/ca.pem", NULL, NULL);
-
-        $mysqli->real_connect(
-            $a_host,
-            $a_user,
-            $a_pass,
-            $a_db,
-            $a_port,
-            NULL,
-            MYSQLI_CLIENT_SSL
-        );
-
-        $mysqli->set_charset("utf8mb4");
-
-        return $mysqli;
+        return $pdo;
 
     } catch (Exception $e) {
-
         error_log("[DB] Server A falhou: " . $e->getMessage());
 
         // =========================
         // 🔹 SERVER B (fallback)
         // =========================
-        $b_host = getenv("DB_HOST");
-        $b_user = getenv("DB_USER");
-        $b_pass = getenv("DB_PASS");
-        $b_db   = getenv("DB_BD");
+        $b_host = getenv("DB_FALLBACK_HOST");
+        $b_user = getenv("DB_FALLBACK_USER");
+        $b_pass = getenv("DB_FALLBACK_PASS");
+        $b_db   = getenv("DB_FALLBACK_NAME");
+        $b_port = getenv("DB_FALLBACK_PORT") ?: 3306;
 
         try {
-
             if (!hostValido($b_host)) {
-                throw new Exception("DNS inválido Server B: " . $b_host);
+                throw new Exception("Host inválido Server B: " . $b_host);
             }
 
-            $conn = mysqli_init();
-            $conn->options(MYSQLI_OPT_CONNECT_TIMEOUT, 5);
+            $dsn = "mysql:host=$b_host;port=$b_port;dbname=$b_db;charset=utf8mb4";
+            $pdo = new PDO($dsn, $b_user, $b_pass, [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+            ]);
 
-            $conn->real_connect($b_host, $b_user, $b_pass, $b_db);
-
-            $conn->set_charset("utf8mb4");
-
-            return $conn;
+            return $pdo;
 
         } catch (Exception $e2) {
-
             error_log("[DB] Server B falhou: " . $e2->getMessage());
-
-            // 🚨 erro final (sem vazar info)
             erroSistema();
         }
     }
 }
 
+// 🔌 Cria conexão global
+$pdo = connectDatabases();
 
-// No seu config.php (adicione ao final ou antes de fechar a tag PHP)
-
+// Funções encode/decode
 function encodeId($id) {
     if ($id == 0 || $id === null) return '0';
     return str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($id . "drive"));
@@ -133,6 +110,10 @@ function decodeId($hash) {
     return is_numeric($val) ? (int)$val : 0;
 }
 
-
-// 🔌 cria conexão
-$conn = connectDatabases();
+// Exemplo de função de query rápida
+function query($sql, $params = []) {
+    global $pdo;
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute($params);
+    return $stmt;
+}
