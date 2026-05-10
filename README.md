@@ -73,9 +73,14 @@ Este projeto utiliza variáveis de ambiente para gerenciar credenciais sensívei
 
 ---
 
+---
+
+## 🛑 Status do Projeto: Descontinuado
+
 ## 🚀 Como Configurar e Instalar
 
 ### 1. Clone o repositório
 ```bash
 git clone [https://github.com/nzp5002/MyDrive.git](https://github.com/nzp5002/MyDrive.git)
 cd MyDrive
+
