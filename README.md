@@ -88,6 +88,7 @@ export DB_USER='seu_usuario'
 export DB_PASS='sua_senha'
 export DB_NAME='mydrive'
 export SKEY='sua_chave_secreta_de_32_caracteres'
+```
 
 # Iniciar o servidor (exemplo)
 
