@@ -57,6 +57,40 @@ O projeto foi desenvolvido com foco em:
 
 ---
 
+
+## ⚙️ Configuração do Ambiente
+
+Este projeto utiliza variáveis de ambiente para gerenciar credenciais sensíveis e garantir a segurança dos dados. Certifique-se de configurar as seguintes variáveis no seu ambiente de hospedagem ou servidor.
+
+### 🔑 Variáveis Necessárias
+
+| Variável | Descrição | Exemplo / Padrão |
+| :--- | :--- | :--- |
+| **`DB_HOST`** | Endereço do servidor MySQL | `localhost` ou `127.0.0.1` |
+| **`DB_USER`** | Usuário do banco de dados | `root` |
+| **`DB_PASS`** | Senha do banco de dados | `sua_senha_segura` |
+| **`DB_NAME`** | Nome da base de dados (Schema) | `mydrive_db` |
+| **`DB_PORT`** | Porta de conexão do MySQL | `3306` |
+| **`SKEY`** | Chave mestra para criptografia AES-256 | `32-caracteres-aleatorios` |
+
+> [!IMPORTANT]
+> **Atenção com a `SKEY`:** Esta chave é utilizada para cifrar os arquivos via **AES-256-CBC**. Se você alterar ou perder essa chave, todos os arquivos já armazenados no servidor se tornarão **irrecuperáveis**, pois não será possível descriptografá-los.
+
+---
+
+### 🚀 Como Configurar
+
+#### No Terminal (Linux / Termux)
+Se estiver executando o servidor manualmente, você pode exportar as variáveis antes de iniciar o serviço:
+```bash
+export DB_HOST='localhost'
+export DB_USER='seu_usuario'
+export DB_PASS='sua_senha'
+export DB_NAME='mydrive'
+export SKEY='sua_chave_secreta_de_32_caracteres'
+
+# Iniciar o servidor (exemplo)
+
 # 📦 Instalação
 
 ## Clone o repositório
