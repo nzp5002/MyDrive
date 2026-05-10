@@ -20,28 +20,25 @@
 
 # ✨ Sobre o Projeto
 
-O **MyDrive** é um sistema de armazenamento de arquivos inspirado em plataformas cloud modernas.
+O **MyDrive** é um sistema de armazenamento de arquivos inspirado em plataformas cloud modernas, focado em segurança e portabilidade.
 
 O projeto foi desenvolvido com foco em:
-
-- ☁️ Armazenamento online
-- 🔐 Sistema de autenticação
-- 📂 Gerenciamento de arquivos
-- ⚡ Simplicidade e desempenho
-- 🌐 Integração entre cliente e servidor
+- ☁️ **Armazenamento online:** Acesso aos seus arquivos de qualquer lugar.
+- 🔐 **Segurança:** Criptografia ponta a ponta no armazenamento físico.
+- 📂 **Organização:** Sistema de pastas e gerenciamento intuitivo.
+- ⚡ **Desempenho:** Processamento de uploads grandes via fragmentação (chunks).
+- 🌐 **Hospedagem flexível:** Compatível com servidores Linux e ambientes Android (Termux).
 
 ---
 
 # ⚡ Funcionalidades
 
-- 📤 Upload de arquivos
-- 📥 Download de arquivos
-- 📂 Organização de pastas
-- 🔑 Login de usuários
-- ☁️ Sistema cloud
-- 🗂️ Gerenciamento de mídia
-- ⚙️ Backend integrado
-- 🚀 Estrutura leve
+- 📤 **Upload Resumable:** Suporte a arquivos grandes com retomada em caso de falha.
+- 🛡️ **Criptografia AES-256:** Arquivos protegidos por chave mestra no servidor.
+- 📂 **Gerenciamento de Pastas:** Crie e organize sua estrutura de diretórios.
+- 🔑 **Autenticação:** Sistema de login seguro para múltiplos usuários.
+- 🗂️ **Detecção de MIME:** Identificação automática do tipo de arquivo.
+- 🚀 **Estrutura Leve:** Backend otimizado para baixo consumo de recursos.
 
 ---
 
@@ -49,52 +46,36 @@ O projeto foi desenvolvido com foco em:
 
 | Tecnologia | Uso |
 |---|---|
-| PHP | Backend/API |
-| MySQL | Banco de dados |
-| JavaScript | Funcionalidades |
-| HTML/CSS | Interface |
-| Apache/Nginx | Servidor Web |
+| **PHP 7.4+** | Backend, API e lógica de criptografia |
+| **MySQL / MariaDB** | Persistência de dados e metadados |
+| **JavaScript** | Interface dinâmica e lógica de upload (Resumable.js) |
+| **HTML5 / CSS3** | Interface de usuário responsiva |
+| **Apache / Nginx** | Servidor Web |
 
 ---
 
-
 ## ⚙️ Configuração do Ambiente
 
-Este projeto utiliza variáveis de ambiente para gerenciar credenciais sensíveis e garantir a segurança dos dados. Certifique-se de configurar as seguintes variáveis no seu ambiente de hospedagem ou servidor.
+Este projeto utiliza variáveis de ambiente para gerenciar credenciais sensíveis. **Não pule esta etapa.**
 
 ### 🔑 Variáveis Necessárias
 
 | Variável | Descrição | Exemplo / Padrão |
 | :--- | :--- | :--- |
-| **`DB_HOST`** | Endereço do servidor MySQL | `localhost` ou `127.0.0.1` |
+| **`DB_HOST`** | Endereço do servidor MySQL | `localhost` |
 | **`DB_USER`** | Usuário do banco de dados | `root` |
-| **`DB_PASS`** | Senha do banco de dados | `sua_senha_segura` |
-| **`DB_NAME`** | Nome da base de dados (Schema) | `mydrive_db` |
-| **`DB_PORT`** | Porta de conexão do MySQL | `3306` |
-| **`SKEY`** | Chave mestra para criptografia AES-256 | `32-caracteres-aleatorios` |
+| **`DB_PASS`** | Senha do banco de dados | `sua_senha` |
+| **`DB_NAME`** | Nome da base de dados | `mydrive_db` |
+| **`SKEY`** | Chave mestra de criptografia | `chave-de-32-caracteres` |
 
 > [!IMPORTANT]
-> **Atenção com a `SKEY`:** Esta chave é utilizada para cifrar os arquivos via **AES-256-CBC**. Se você alterar ou perder essa chave, todos os arquivos já armazenados no servidor se tornarão **irrecuperáveis**, pois não será possível descriptografá-los.
+> **Atenção com a `SKEY`:** Esta chave cifra os arquivos via **AES-256-CBC**. Se você alterar ou perder essa chave, os arquivos no servidor se tornarão **irrecuperáveis**.
 
 ---
 
-### 🚀 Como Configurar
+## 🚀 Como Configurar e Instalar
 
-#### No Terminal (Linux / Termux)
-Se estiver executando o servidor manualmente, você pode exportar as variáveis antes de iniciar o serviço:
+### 1. Clone o repositório
 ```bash
-export DB_HOST='localhost'
-export DB_USER='seu_usuario'
-export DB_PASS='sua_senha'
-export DB_NAME='mydrive'
-export SKEY='sua_chave_secreta_de_32_caracteres'
-```
-
-# Iniciar o servidor (exemplo)
-
-# 📦 Instalação
-
-## Clone o repositório
-
-```bash
-git clone https://github.com/nzp5002/MyDrive.git
+git clone [https://github.com/nzp5002/MyDrive.git](https://github.com/nzp5002/MyDrive.git)
+cd MyDrive
