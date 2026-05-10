@@ -41,21 +41,25 @@ function erroSistema() {
 function connectDatabases() {
 
     // =========================
-    // 🔹 SERVER A (Railway)
+    // 🔹 SERVIDOR (Variáveis de Ambiente)
     // =========================
-    $a_host = getenv("DB_HOST") ?: "mysql.railway.internal";
-    $a_user = getenv("DB_USER") ?: "root";
-    $a_pass = getenv("DB_PASS") ?: "xItvojBtrwUlQrIxlhLWRLrLUahvAZZL";
-    $a_db   = getenv("DB_NAME") ?: "railway";
-    $a_port = getenv("DB_PORT") ?: 3306;
+    $host = getenv("DB_HOST");
+    $user = getenv("DB_USER");
+    $pass = getenv("DB_PASS");
+    $db   = getenv("DB_NAME");
+    $port = getenv("DB_PORT") ?: 3306;
 
     try {
-        if (!hostValido($a_host)) {
-            throw new Exception("Host inválido Server A: " . $a_host);
+        if (empty($host) || empty($user) || empty($pass) || empty($db)) {
+            throw new Exception("Variáveis de ambiente não configuradas");
         }
 
-        $dsn = "mysql:host=$a_host;port=$a_port;dbname=$a_db;charset=utf8mb4";
-        $pdo = new PDO($dsn, $a_user, $a_pass, [
+        if (!hostValido($host)) {
+            throw new Exception("Host inválido: " . $host);
+        }
+
+        $dsn = "mysql:host=$host;port=$port;dbname=$db;charset=utf8mb4";
+        $pdo = new PDO($dsn, $user, $pass, [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
         ]);
@@ -63,34 +67,8 @@ function connectDatabases() {
         return $pdo;
 
     } catch (Exception $e) {
-        error_log("[DB] Server A falhou: " . $e->getMessage());
-
-        // =========================
-        // 🔹 SERVER B (fallback)
-        // =========================
-        $b_host = getenv("DB_FALLBACK_HOST");
-        $b_user = getenv("DB_FALLBACK_USER");
-        $b_pass = getenv("DB_FALLBACK_PASS");
-        $b_db   = getenv("DB_FALLBACK_NAME");
-        $b_port = getenv("DB_FALLBACK_PORT") ?: 3306;
-
-        try {
-            if (!hostValido($b_host)) {
-                throw new Exception("Host inválido Server B: " . $b_host);
-            }
-
-            $dsn = "mysql:host=$b_host;port=$b_port;dbname=$b_db;charset=utf8mb4";
-            $pdo = new PDO($dsn, $b_user, $b_pass, [
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-            ]);
-
-            return $pdo;
-
-        } catch (Exception $e2) {
-            error_log("[DB] Server B falhou: " . $e2->getMessage());
-            erroSistema();
-        }
+        error_log("[DB] Erro na conexão: " . $e->getMessage());
+        erroSistema();
     }
 }
 
