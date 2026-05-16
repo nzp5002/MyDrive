@@ -3,6 +3,10 @@ require_once 'config.php';
 if (session_status() === PHP_SESSION_NONE) session_start();
 checkLogin();
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 // 1. Configuração de URL
 $protocol = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ? "https" : "http";
 $host = $_SERVER['SERVER_NAME'];
