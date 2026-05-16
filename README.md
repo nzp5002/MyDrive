@@ -64,10 +64,9 @@ Para entrar no sistema após abrir a página, utilize a conta de administrador p
   <img src="https://github.com/nzp5002/MyDrive/blob/main/Screenshot_20260516_040440_Chrome.jpg?raw=true" alt="Tela de Login MyDrive" width="320"/>
 </div>
 
+# 🚀 Como Executar o Projeto
 
-# 🚀 Instalação, Credenciais e Banco de Dados
-
-Siga os passos abaixo para clonar o repositório, verificar os dados de acesso e importar a estrutura do banco de dados:
+Instale o projeto localmente seguindo os passos abaixo:
 
 ```bash
 # Clone o repositório
@@ -75,3 +74,4 @@ git clone [https://github.com/nzp5002/MyDrive.git](https://github.com/nzp5002/My
 
 # Acesse a pasta do projeto
 cd MyDrive
+
