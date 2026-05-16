@@ -61,7 +61,7 @@ if ($current_folder > 0) {
     $stmt_file->bind_param("is", $current_folder, $searchTerm);
     $stmt_file->execute();
     $files_res = $stmt_file->get_result()->fetch_all(MYSQLI_ASSOC);
-    
+
     $items = array_merge($folders_res, $files_res);
 } else {
     if ($aba === 'recebidos') {
@@ -85,12 +85,12 @@ if ($current_folder > 0) {
     } else {
         // Meu Drive Raiz
         $stmt_f = $conn->prepare("SELECT id, nome, status, 'folder' as item_type FROM folders WHERE user_id = ? AND parent_id = 0 AND nome LIKE ?");
-        $stmt_f->bind_param("is", $user_id, $searchTerm); 
+        $stmt_f->bind_param("is", $user_id, $searchTerm);
         $stmt_f->execute();
         $folders_res = $stmt_f->get_result()->fetch_all(MYSQLI_ASSOC);
 
         $stmt_file = $conn->prepare("SELECT *, 'file' as item_type FROM files WHERE user_id = ? AND folder_id = 0 AND nome LIKE ? ORDER BY uploaded_at DESC");
-        $stmt_file->bind_param("is", $user_id, $searchTerm); 
+        $stmt_file->bind_param("is", $user_id, $searchTerm);
         $stmt_file->execute();
         $files_res = $stmt_file->get_result()->fetch_all(MYSQLI_ASSOC);
         $items = array_merge($folders_res, $files_res);
@@ -212,7 +212,7 @@ if (!empty($user_data['foto']) && file_exists("perfil/" . $user_data['foto'])) $
                             <?php if($isFolder): ?>
                                 <i class="fas fa-folder text-5xl <?= $colorStatus ?> mb-4 opacity-80"></i>
                                 <a href="index.php?folder=<?= $encoded_id ?>&aba=<?= $aba ?>" class="text-[11px] font-bold text-slate-700 w-full text-center px-2 overflow-hidden text-ellipsis whitespace-nowrap"><?= htmlspecialchars($item['nome']) ?></a>
-                                
+
                                 <?php if($aba !== 'recebidos'): ?>
                                 <button onclick="partilhar('<?= $encoded_id ?>')" class="mt-4 text-[9px] font-black text-slate-400 bg-slate-50 px-3 py-2 rounded-lg hover:bg-slate-200 transition"><i class="fas fa-share-nodes"></i> Amigos</button>
                                 <?php endif; ?>
@@ -223,8 +223,8 @@ if (!empty($user_data['foto']) && file_exists("perfil/" . $user_data['foto'])) $
                                 <div class="w-16 h-16 flex items-center justify-center mb-4">
                                     <?php if(strpos($type, 'image') !== false): ?>
                                         <div class="w-full h-full rounded-2xl overflow-hidden border border-slate-100 bg-slate-50">
-                                            <img src="stream.php?file=<?= $fileToken ?>" 
-                                                 class="w-full h-full object-cover" 
+                                            <img src="stream.php?file=<?= $fileToken ?>"
+                                                 class="w-full h-full object-cover"
                                                  onerror="this.parentElement.innerHTML='<i class=\'fas fa-file-image text-4xl text-slate-200\'></i>'">
                                         </div>
                                     <?php else: ?>
@@ -296,13 +296,40 @@ function opcoesItem(id, type, status) {
         denyButtonColor: '#ef4444'
     }).then(r => {
         if(r.isConfirmed) {
-            // Renomear logic (abre outro prompt ou envia direto)
             Swal.fire({ title: 'Novo Nome', input: 'text', showCancelButton: true }).then(res => {
                 if(res.value) window.location.href = `rename.php?id=${id}&type=${type}&newname=${encodeURIComponent(res.value)}`;
             });
         } else if(r.isDenied) {
-            Swal.fire({ title: 'APAGAR?', icon: 'warning', showCancelButton: true }).then(res => {
-                if(res.isConfirmed) window.location.href = `delete.php?id=${id}&type=${type}`;
+            Swal.fire({
+                title: 'APAGAR?',
+                text: "Esta ação apagará permanentemente o item selecionado!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#ef4444',
+                cancelButtonColor: '#64748b',
+                confirmButtonText: 'Sim, deletar!',
+                cancelButtonText: 'Cancelar'
+            }).then((res) => {
+                if (res.isConfirmed) {
+                    // CORREÇÃO: Enviando via POST assíncrono para manter a pasta atual
+                    const params = new URLSearchParams({ id: id, type: type });
+                    fetch('delete.php', {
+                        method: 'POST',
+                        body: params
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if(data.success) {
+                            Swal.fire({ icon: 'success', title: 'Deletado!', showConfirmButton: false, timer: 1000 })
+                            .then(() => location.reload());
+                        } else {
+                            Swal.fire('Erro!', data.message || 'Não foi possível apagar.', 'error');
+                        }
+                    })
+                    .catch(() => {
+                        Swal.fire('Erro!', 'Falha de comunicação com o servidor.', 'error');
+                    });
+                }
             });
         }
     });
@@ -331,8 +358,8 @@ async function abrirBuscaAmigos() {
     if (u) fetch(`amizade.php?username=${encodeURIComponent(u.replace('@', ''))}`).then(r => r.json()).then(d => d.ok ? Swal.fire('OK', 'Enviado', 'success') : Swal.fire('ERRO', d.msg, 'error'));
 }
 
-function mostrarMeuQR() { 
-    Swal.fire({ title: 'MEU QR', imageUrl: `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=mydrive_user:<?= urlencode($user_data['username']) ?>`, showConfirmButton: false }); 
+function mostrarMeuQR() {
+    Swal.fire({ title: 'MEU QR', imageUrl: `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=mydrive_user:<?= urlencode($user_data['username']) ?>`, showConfirmButton: false });
 }
 
 <?php if($aba === 'meus'): ?>
