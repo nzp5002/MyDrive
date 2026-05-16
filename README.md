@@ -2,14 +2,14 @@
 
 <div align="center">
 
-<img src="https://raw.githubusercontent.com/github/explore/main/topics/cloud/cloud.png" width="140"/>
+<img src="https://github.com/nzp5002/MyDrive/blob/main/Screenshot_20260516_041624_Chrome.jpg" width="140"/>
 
 # 🚀 MyDrive
 
 ### Sistema moderno de armazenamento em nuvem.
 
 <p align="center">
-  <img src="https://img.shields.io/github/stars/nzp5002/MyDrive?style=for-the-badge&logo=github"/>
+  <img src=""/>
   <img src="https://img.shields.io/github/forks/nzp5002/MyDrive?style=for-the-badge&logo=git"/>
   <img src="https://img.shields.io/github/repo-size/nzp5002/MyDrive?style=for-the-badge"/>
 </p>
