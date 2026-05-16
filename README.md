@@ -53,25 +53,13 @@ Antes de iniciar, configure o seu arquivo de conexão (ex: `config.php`) com as 
 
 ---
 
-# 🚀 Como Executar o Projeto
+# 🚀 Instalação, Credenciais e Banco de Dados
 
-Instale o projeto localmente seguindo os passos abaixo:
+Siga os passos abaixo para clonar o repositório, verificar os dados de acesso e importar a estrutura do banco de dados:
 
 ```bash
 # Clone o repositório
 git clone [https://github.com/nzp5002/MyDrive.git](https://github.com/nzp5002/MyDrive.git)
-
-### 🔑 Credenciais Padrão para Testes
-
-Após realizar a importação do banco de dados, você pode acessar o sistema utilizando o seguinte usuário administrador padrão:
-
-| Usuário (Username) | Senha Padrão (Password) | Status da Conta |
-| :--- | :--- | :--- |
-| **`admin`** | `123` | Ativo |
-
----
-
-
 
 # Acesse a pasta do projeto
 cd MyDrive
