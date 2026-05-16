@@ -53,6 +53,18 @@ Antes de iniciar, configure o seu arquivo de conexão (ex: `config.php`) com as 
 
 ---
 
+### 🔑 Dados de Acesso (Login no Sistema)
+
+Para entrar no sistema após abrir a página, utilize a conta de administrador padrão indicada abaixo:
+
+* **Usuário:** `admin`
+* **Senha:** `123`
+
+<div align="center">
+  <img src="https://github.com/nzp5002/MyDrive/blob/main/Screenshot_20260516_040440_Chrome.jpg?raw=true" alt="Tela de Login MyDrive" width="320"/>
+</div>
+
+
 # 🚀 Instalação, Credenciais e Banco de Dados
 
 Siga os passos abaixo para clonar o repositório, verificar os dados de acesso e importar a estrutura do banco de dados:
