@@ -40,9 +40,40 @@ O projeto foi desenvolvido com foco em:
 
 ---
 
-# 🗄️ Estrutura do Banco de Dados
+# ⚙️ Pré-requisitos e Variáveis de Ambiente
 
-Copie o código SQL abaixo, salve em um arquivo como `database.sql` e importe diretamente na aba **Importar** do seu phpMyAdmin:
+Antes de iniciar, configure o seu arquivo de conexão (ex: `config.php`) com as credenciais do seu ambiente:
+
+| Variável | Descrição | Exemplo Padrão |
+| :--- | :--- | :--- |
+| **DB_HOST** | Endereço do servidor MySQL | `localhost` |
+| **DB_USER** | Usuário do banco de dados | `root` |
+| **DB_PASS** | Senha do banco de dados | ` ` (vazio) ou `sua_senha` |
+| **DB_NAME** | Nome do banco de dados | `MyDrive` |
+
+---
+
+# 🚀 Como Executar o Projeto
+
+Instale o projeto localmente seguindo os passos abaixo:
+
+```bash
+# Clone o repositório
+git clone [https://github.com/nzp5002/MyDrive.git](https://github.com/nzp5002/MyDrive.git)
+
+### 🔑 Credenciais Padrão para Testes
+
+Após realizar a importação do banco de dados, você pode acessar o sistema utilizando o seguinte usuário administrador padrão:
+
+| Usuário (Username) | Senha Padrão (Password) | Status da Conta |
+| :--- | :--- | :--- |
+| **`admin`** | `123` | Ativo |
+
+---
+
+### 🗄️ Script de Importação do Banco de Dados
+
+Copie o código SQL abaixo, salve-o em um arquivo chamado `database.sql` e importe diretamente na aba **Importar** do seu phpMyAdmin:
 
 ```sql
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -200,9 +231,13 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Usuário padrão para testes (Senha: 123)
+-- Inserindo usuário padrão administrativo (Senha: 123)
 --
 INSERT INTO `users` (`id`, `nome`, `username`, `password`, `indicado_por`, `status`, `foto`) VALUES
 (1, 'admin', 'admin', '$2y$10$iN6ZlA.r4M7a9m39BnyMkuYEq/oVshHAsD8B4GThmZ7P3wU2O8T06', 0, 'ativo', NULL);
 
 COMMIT;
+
+
+# Acesse a pasta do projeto
+cd MyDrive
