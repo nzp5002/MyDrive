@@ -1,0 +1,315 @@
+
+==== 02:19:19 ====
+METHOD: GET
+Array
+(
+)
+Array
+(
+)
+
+==== 02:24:42 ====
+METHOD: GET
+Array
+(
+)
+Array
+(
+)
+
+==== 02:29:11 ====
+METHOD: GET
+Array
+(
+)
+Array
+(
+)
+
+==== 02:41:27 ====
+METHOD: GET
+Array
+(
+)
+Array
+(
+)
+
+==== 02:45:43 ====
+METHOD: GET
+Array
+(
+)
+Array
+(
+)
+
+==== 02:57:59 ====
+METHOD: GET
+Array
+(
+)
+Array
+(
+)
+
+==== 03:32:45 ====
+METHOD: POST
+Array
+(
+    [resumableChunkNumber] => 1
+    [resumableChunkSize] => 1048576
+    [resumableCurrentChunkSize] => 138728
+    [resumableTotalSize] => 138728
+    [resumableType] => image/jpeg
+    [resumableIdentifier] => 138728-IMG-20260516-WA0153jpg
+    [resumableFilename] => IMG-20260516-WA0153.jpg
+    [resumableRelativePath] => IMG-20260516-WA0153.jpg
+    [resumableTotalChunks] => 1
+    [folder_id] => 0
+)
+Array
+(
+    [file] => Array
+        (
+            [name] => IMG-20260516-WA0153.jpg
+            [full_path] => IMG-20260516-WA0153.jpg
+            [type] => application/octet-stream
+            [tmp_name] => /data/data/com.termux/files/usr/tmp/phpa2foeaiclcj18dxwA66
+            [error] => 0
+            [size] => 138728
+        )
+
+)
+
+==== 14:34:25 ====
+METHOD: POST
+Array
+(
+    [resumableChunkNumber] => 1
+    [resumableChunkSize] => 1048576
+    [resumableCurrentChunkSize] => 211070
+    [resumableTotalSize] => 211070
+    [resumableType] => image/jpeg
+    [resumableIdentifier] => 211070-3jpg
+    [resumableFilename] => 3.jpg
+    [resumableRelativePath] => 3.jpg
+    [resumableTotalChunks] => 1
+    [folder_id] => 0
+)
+Array
+(
+    [file] => Array
+        (
+            [name] => 3.jpg
+            [full_path] => 3.jpg
+            [type] => application/octet-stream
+            [tmp_name] => /data/data/com.termux/files/usr/tmp/php4hcdte2ujlgn87uPZ8M
+            [error] => 0
+            [size] => 211070
+        )
+
+)
+
+==== 14:35:00 ====
+METHOD: POST
+Array
+(
+    [resumableChunkNumber] => 1
+    [resumableChunkSize] => 1048576
+    [resumableCurrentChunkSize] => 66007
+    [resumableTotalSize] => 66007
+    [resumableType] => image/jpeg
+    [resumableIdentifier] => 66007-IMG-20260516-WA00001jpg
+    [resumableFilename] => IMG-20260516-WA0000 (1).jpg
+    [resumableRelativePath] => IMG-20260516-WA0000 (1).jpg
+    [resumableTotalChunks] => 1
+    [folder_id] => 0
+)
+Array
+(
+    [file] => Array
+        (
+            [name] => IMG-20260516-WA0000 (1).jpg
+            [full_path] => IMG-20260516-WA0000 (1).jpg
+            [type] => application/octet-stream
+            [tmp_name] => /data/data/com.termux/files/usr/tmp/phpc7sgh5h7kouoacZcIVB
+            [error] => 0
+            [size] => 66007
+        )
+
+)
+
+==== 14:39:55 ====
+METHOD: POST
+Array
+(
+    [resumableChunkNumber] => 1
+    [resumableChunkSize] => 1048576
+    [resumableCurrentChunkSize] => 211070
+    [resumableTotalSize] => 211070
+    [resumableType] => image/jpeg
+    [resumableIdentifier] => 211070-3jpg
+    [resumableFilename] => 3.jpg
+    [resumableRelativePath] => 3.jpg
+    [resumableTotalChunks] => 1
+    [folder_id] => 0
+)
+Array
+(
+    [file] => Array
+        (
+            [name] => 3.jpg
+            [full_path] => 3.jpg
+            [type] => application/octet-stream
+            [tmp_name] => /data/data/com.termux/files/usr/tmp/php8vp1c033ve5q0ViLRpT
+            [error] => 0
+            [size] => 211070
+        )
+
+)
+
+==== 14:46:51 ====
+METHOD: POST
+Array
+(
+    [resumableChunkNumber] => 1
+    [resumableChunkSize] => 1048576
+    [resumableCurrentChunkSize] => 79895
+    [resumableTotalSize] => 79895
+    [resumableType] => image/jpeg
+    [resumableIdentifier] => 79895-sample_5b362949cc5ff05f1b19898dc775d6c03390dc13jpg
+    [resumableFilename] => sample_5b362949cc5ff05f1b19898dc775d6c03390dc13.jpg
+    [resumableRelativePath] => sample_5b362949cc5ff05f1b19898dc775d6c03390dc13.jpg
+    [resumableTotalChunks] => 1
+    [folder_id] => 0
+)
+Array
+(
+    [file] => Array
+        (
+            [name] => sample_5b362949cc5ff05f1b19898dc775d6c03390dc13.jpg
+            [full_path] => sample_5b362949cc5ff05f1b19898dc775d6c03390dc13.jpg
+            [type] => application/octet-stream
+            [tmp_name] => /data/data/com.termux/files/usr/tmp/php1od8ndvf9bet0AHGKow
+            [error] => 0
+            [size] => 79895
+        )
+
+)
+
+==== 18:28:24 ====
+METHOD: POST
+Array
+(
+    [resumableChunkNumber] => 1
+    [resumableChunkSize] => 1048576
+    [resumableCurrentChunkSize] => 303394
+    [resumableTotalSize] => 303394
+    [resumableType] => image/jpeg
+    [resumableIdentifier] => 303394-Screenshot_20260517_141412_Chromejpg
+    [resumableFilename] => Screenshot_20260517_141412_Chrome.jpg
+    [resumableRelativePath] => Screenshot_20260517_141412_Chrome.jpg
+    [resumableTotalChunks] => 1
+    [folder_id] => 0
+)
+Array
+(
+    [file] => Array
+        (
+            [name] => Screenshot_20260517_141412_Chrome.jpg
+            [full_path] => Screenshot_20260517_141412_Chrome.jpg
+            [type] => application/octet-stream
+            [tmp_name] => /data/data/com.termux/files/usr/tmp/phpulk7h6a8991s5IhUnoJ
+            [error] => 0
+            [size] => 303394
+        )
+
+)
+
+==== 22:44:23 ====
+METHOD: POST
+Array
+(
+    [resumableChunkNumber] => 1
+    [resumableChunkSize] => 1048576
+    [resumableCurrentChunkSize] => 13086
+    [resumableTotalSize] => 13086
+    [resumableType] => image/jpeg
+    [resumableIdentifier] => 13086-images3jpeg
+    [resumableFilename] => images (3).jpeg
+    [resumableRelativePath] => images (3).jpeg
+    [resumableTotalChunks] => 1
+    [folder_id] => 0
+)
+Array
+(
+    [file] => Array
+        (
+            [name] => images (3).jpeg
+            [full_path] => images (3).jpeg
+            [type] => application/octet-stream
+            [tmp_name] => /data/data/com.termux/files/usr/tmp/phpkpv4dvvnaq3h8pgVnHJ
+            [error] => 0
+            [size] => 13086
+        )
+
+)
+
+==== 23:25:06 ====
+METHOD: POST
+Array
+(
+    [resumableChunkNumber] => 1
+    [resumableChunkSize] => 1048576
+    [resumableCurrentChunkSize] => 11738
+    [resumableTotalSize] => 11738
+    [resumableType] => image/jpeg
+    [resumableIdentifier] => 11738-BlackFilesIconjpeg
+    [resumableFilename] => Black Files Icon.jpeg
+    [resumableRelativePath] => Black Files Icon.jpeg
+    [resumableTotalChunks] => 1
+    [folder_id] => 0
+)
+Array
+(
+    [file] => Array
+        (
+            [name] => Black Files Icon.jpeg
+            [full_path] => Black Files Icon.jpeg
+            [type] => application/octet-stream
+            [tmp_name] => /data/data/com.termux/files/usr/tmp/phprh1olnit670lbFSEzhm
+            [error] => 0
+            [size] => 11738
+        )
+
+)
+
+==== 23:25:44 ====
+METHOD: POST
+Array
+(
+    [resumableChunkNumber] => 1
+    [resumableChunkSize] => 1048576
+    [resumableCurrentChunkSize] => 106530
+    [resumableTotalSize] => 106530
+    [resumableType] => image/jpeg
+    [resumableIdentifier] => 106530-IMG-20260523-WA0023jpg
+    [resumableFilename] => IMG-20260523-WA0023.jpg
+    [resumableRelativePath] => IMG-20260523-WA0023.jpg
+    [resumableTotalChunks] => 1
+    [folder_id] => 0
+)
+Array
+(
+    [file] => Array
+        (
+            [name] => IMG-20260523-WA0023.jpg
+            [full_path] => IMG-20260523-WA0023.jpg
+            [type] => application/octet-stream
+            [tmp_name] => /data/data/com.termux/files/usr/tmp/phpao4fd6vjkbs10IvtomO
+            [error] => 0
+            [size] => 106530
+        )
+
+)

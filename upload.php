@@ -3,8 +3,17 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+file_put_contents(
+    __DIR__ . '/debug_upload.txt',
+    "\n==== " . date('H:i:s') . " ====\n" .
+    "METHOD: " . $_SERVER['REQUEST_METHOD'] . "\n" .
+    print_r($_POST, true) .
+    print_r($_FILES, true),
+    FILE_APPEND
+);
 
-require_once 'config.php';
+
+require_once '../db/config.php';
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -51,7 +60,9 @@ $secret_key = getenv("SKEY");
 if (!$secret_key || trim($secret_key) === '') {
 
     // fallback automático
-    $secret_key = gerarChaveHardware();
+    // $secret_key = gerarChaveHardware();
+       $secret_key=  "002c92dda949cbaecab0fe78815e46de747e614f4fe4d856ae29afbbe2fe535b";
+
 }
 
 // =========================

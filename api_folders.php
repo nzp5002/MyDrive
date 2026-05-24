@@ -1,6 +1,6 @@
 <?php
 // api_folders.php
-require_once 'config.php';
+require_once '../db/config.php';
 
 // 1. Evita erro de sessão duplicada (já iniciada no config.php)
 if (session_status() === PHP_SESSION_NONE) {

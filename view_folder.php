@@ -1,5 +1,5 @@
 <?php
-require_once 'config.php';
+require_once '/../db/config.php';
 
 // 1. Pegar o ID da pasta pela URL
 $hash = $_GET['id'] ?? '';

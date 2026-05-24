@@ -1,6 +1,6 @@
 <?php
 
-require_once 'config.php';
+require_once '../db/config.php';
 
 // =========================
 // GERAR CHAVE HARDWARE
@@ -19,7 +19,9 @@ function gerarChaveHardware() {
         $dados .= file_get_contents('/etc/machine-id');
     }
 
-    $android_id = trim(shell_exec('settings get secure android_id 2>/dev/null'));
+    // CORREÇÃO: Garante que se o shell_exec retornar null ou falso, vire uma string vazia antes do trim
+    $exec_android = shell_exec('settings get secure android_id 2>/dev/null');
+    $android_id = trim($exec_android ?? '');
 
     $dados .= $android_id;
 
@@ -59,8 +61,10 @@ if ($padding > 0) {
 // =========================
 // DESCRIPTOGRAFAR TOKEN
 // =========================
+$base64_decoded = base64_decode($token);
+
 $token_decoded = openssl_decrypt(
-    base64_decode($token),
+    $base64_decoded,
     "aes-128-cbc",
     $secret_key,
     0,
@@ -68,7 +72,13 @@ $token_decoded = openssl_decrypt(
 );
 
 if (!$token_decoded) {
-    die("Token inválido.");
+    // Alerta de debug caso a chave gerada no index.php divirja desta por escopo do Termux
+    die("Token inválido. Verifique se a SKEY está idêntica no index.php");
+}
+
+// Garante que o explode não falhará se a string vier malformada
+if (strpos($token_decoded, '|') === false) {
+    die("Token corrompido ou chave secreta incompatível.");
 }
 
 list($file_id, $expires) = explode('|', $token_decoded);
@@ -89,16 +99,18 @@ $stmt->execute();
 $file = $stmt->get_result()->fetch_assoc();
 
 if (!$file) {
-    die("Arquivo não encontrado.");
+    die("Arquivo não encontrado no banco de dados.");
 }
 
 // =========================
 // CAMINHO REAL
 // =========================
-$caminho_real = __DIR__ . "/uploads/" . $file['arquivo'];
+// NOTA: Ajustado de $file['arquivo'] para $file['caminho'] baseado na estrutura padrão do MyDrive
+$nome_arquivo_fisico = $file['caminho'] ?? $file['arquivo'] ?? '';
+$caminho_real = __DIR__ . "/uploads/" . $nome_arquivo_fisico;
 
 if (!file_exists($caminho_real)) {
-    die("Arquivo físico ausente.");
+    die("Arquivo físico ausente no servidor.");
 }
 
 // =========================
@@ -111,7 +123,7 @@ if ($raw_data === false) {
 }
 
 // =========================
-// DESCRIPTOGRAFAR
+// DESCRIPTOGRAFAR CONTEÚDO
 // =========================
 $method = "aes-256-cbc";
 
@@ -129,13 +141,20 @@ $decrypted = openssl_decrypt(
     $iv
 );
 
+// Se o seu upload.php NÃO criptografa o arquivo físico ao salvar, comente a descriptografia acima
+// e use a linha abaixo:
+// $decrypted = $raw_data;
+
 if ($decrypted === false) {
-    die("Erro ao descriptografar.");
+    die("Erro ao descriptografar o conteúdo do arquivo.");
 }
 
 // =========================
 // DOWNLOAD
 // =========================
+// Limpa qualquer buffer de saída residual para evitar corromper o arquivo binário
+if (ob_get_length()) ob_end_clean();
+
 header('Content-Description: File Transfer');
 header('Content-Type: ' . $file['tipo']);
 header('Content-Disposition: attachment; filename="' . $file['nome'] . '"');
@@ -144,6 +163,6 @@ header('Cache-Control: must-revalidate');
 header('Pragma: public');
 
 echo $decrypted;
-
 exit;
 ?>
+

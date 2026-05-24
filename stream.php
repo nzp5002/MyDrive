@@ -1,12 +1,12 @@
 <?php
-require_once 'config.php';
+require_once '../db/config.php';
 
 // Iniciar sessão apenas se necessário para checar login do dono
 if (session_status() === PHP_SESSION_NONE) session_start();
 
 $token_raw = $_GET['file'] ?? '';
 // A chave mestre do servidor para descriptografar o TOKEN (não o arquivo)
-$skey = getenv("SKEY") ?: "sua_chave_secreta_padrao_123"; 
+$skey = getenv("SKEY");
 
 if (empty($token_raw)) exit("Token ausente");
 
@@ -28,7 +28,7 @@ list($file_id, $expira) = explode('|', $decrypted_token);
 if (time() > $expira) exit("Link de visualização expirado");
 
 // --- 2. BUSCAR DADOS DO ARQUIVO NO BANCO ---
-$stmt = $conn->prepare("SELECT caminho, tipo, user_id FROM files WHERE id = ?");
+$stmt = $conn->prepare("SELECT arquivo, tipo, user_id FROM files WHERE id = ?");
 $stmt->bind_param("i", $file_id);
 $stmt->execute();
 $file = $stmt->get_result()->fetch_assoc();
@@ -41,7 +41,7 @@ if (!$file) exit("Arquivo não encontrado");
 // busque-a aqui. Se usa a SKEY, use a SKEY.
 $chave_arquivo = $skey; 
 
-$caminho_real = __DIR__ . "/uploads/" . $file['caminho'];
+$caminho_real = __DIR__ . "/uploads/" . $file['arquivo'];
 
 if (file_exists($caminho_real)) {
     // --- 4. DESCRIPTOGRAFAR O ARQUIVO EM TEMPO REAL ---

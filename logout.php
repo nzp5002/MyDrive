@@ -1,5 +1,5 @@
 <?php
-require_once 'config.php';
+require_once __DIR__  .'/../db/config.php';
 
 // O config.php já deve ter o ob_start() e o session_start()
 // Se não tiver certeza, podemos usar o buffer aqui também:
