@@ -70,7 +70,7 @@ Instale o projeto localmente seguindo os passos abaixo:
 
 ```bash
 # Clone o repositório
-git clone https://github.com/nzp5002/MyDrive.git (https://github.com/nzp5002/MyDrive.git)
+git clone https://github.com/nzp5002/MyDrive.git 
 
 # Acesse a pasta do projeto
 cd MyDrive
