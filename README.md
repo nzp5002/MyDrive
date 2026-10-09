@@ -2,76 +2,107 @@
 
 <div align="center">
 
-<img src="https://github.com/nzp5002/MyDrive/blob/main/Screenshot_20260516_041624_Chrome.jpg" width="140"/>
+<img src="https://raw.githubusercontent.com/nzp5002/MyDrive/main/Screenshot_20260516_041624_Chrome.jpg" alt="MyDrive" width="140">
 
-# 🚀 MyDrive
+# MyDrive — armazenamento de arquivos
 
-### Sistema moderno de armazenamento em nuvem.
+**Uma solução pessoal para enviar, organizar e acessar arquivos pela web.**
 
-<p align="center">
-  <img src=""/>
-  <img src="https://img.shields.io/github/forks/nzp5002/MyDrive?style=for-the-badge&logo=git"/>
-  <img src="https://img.shields.io/github/repo-size/nzp5002/MyDrive?style=for-the-badge"/>
+<p>
+  <img src="https://img.shields.io/github/forks/nzp5002/MyDrive?style=for-the-badge&logo=github" alt="Forks">
+  <img src="https://img.shields.io/github/repo-size/nzp5002/MyDrive?style=for-the-badge" alt="Tamanho do repositório">
 </p>
 
 </div>
 
 ---
 
-# ✨ Sobre o Projeto
+## 📖 Sobre o projeto
 
-O **MyDrive** é um sistema de armazenamento de arquivos inspirado em plataformas cloud modernas, focado em segurança e portabilidade.
+O **MyDrive** é um projeto de armazenamento de arquivos com interface web, desenvolvido em PHP e integrado a um banco de dados MySQL. A proposta é facilitar o envio e a organização de arquivos em um servidor próprio.
 
-O projeto foi desenvolvido com foco em:
-- ☁️ **Armazenamento online:** Acesso aos seus arquivos de qualquer lugar.
-- 🔐 **Segurança:** Criptografia ponta a ponta no armazenamento físico.
-- 📂 **Organização:** Sistema de pastas e gerenciamento intuitivo.
-- ⚡ **Desempenho:** Processamento de uploads grandes via fragmentação (chunks).
-- 🌐 **Hospedagem flexível:** Compatível com servidores Linux e ambientes Android (Termux).
+O projeto busca oferecer:
 
----
+- 📤 **Envio de arquivos:** suporte a uploads divididos em partes (*chunks*), útil para arquivos maiores.
+- 📁 **Organização:** gerenciamento de arquivos e pastas.
+- 🔐 **Acesso por conta:** autenticação para acessar o sistema.
+- 🛡️ **Proteção de arquivos:** recursos de criptografia no lado do servidor.
+- 🖥️ **Hospedagem flexível:** possibilidade de execução em ambientes Linux com PHP, incluindo Termux, desde que as dependências estejam configuradas.
 
-# ⚡ Funcionalidades
+## ✨ Funcionalidades
 
-- 📤 **Upload Resumable:** Suporte a arquivos grandes com retomada em caso de falha.
-- 🛡️ **Criptografia AES-256:** Arquivos protegidos por chave mestra no servidor.
-- 📂 **Gerenciamento de Pastas:** Crie e organize sua estrutura de diretórios.
-- 🔑 **Autenticação:** Sistema de login seguro para múltiplos usuários.
+- Upload de arquivos em partes.
+- Organização de arquivos por pastas.
+- Login de usuários.
+- Compartilhamento e acesso a arquivos, conforme a configuração e os recursos disponíveis na instalação.
+- Integração com PHP e MySQL.
 
----
+## 🧰 Tecnologias
 
-# ⚙️ Pré-requisitos e Variáveis de Ambiente
+- **Backend:** PHP
+- **Banco de dados:** MySQL
+- **Interface:** HTML, CSS e JavaScript, conforme os arquivos do projeto
+- **Servidor:** ambiente web compatível com PHP
 
-Antes de iniciar, configure o seu arquivo de conexão (ex: `config.php`) com as credenciais do seu ambiente:
+## ⚙️ Requisitos
 
-| Variável | Descrição | Exemplo Padrão |
-| :--- | :--- | :--- |
-| **DB_HOST** | Endereço do servidor MySQL | `localhost` |
-| **DB_USER** | Usuário do banco de dados | `root` |
-| **DB_PASS** | Senha do banco de dados | ` ` (vazio) ou `sua_senha` |
-| **DB_NAME** | Nome do banco de dados | `MyDrive` |
+Antes de instalar, verifique se o seu ambiente possui:
 
----
+- PHP e as extensões necessárias ao projeto.
+- MySQL ou MariaDB.
+- Um servidor web compatível com PHP, como Apache ou Nginx.
+- Git, para clonar o repositório.
 
-### 🔑 Dados de Acesso (Login no Sistema)
+## 🚀 Instalação
 
-Para entrar no sistema após abrir a página, utilize a conta de administrador padrão indicada abaixo:
+1. Clone o repositório:
 
-* **Usuário:** `admin`
-* **Senha:** `123`
+   ```bash
+   git clone https://github.com/nzp5002/MyDrive.git
+   ```
+
+2. Entre na pasta do projeto:
+
+   ```bash
+   cd MyDrive
+   ```
+
+3. Configure o banco de dados MySQL/MariaDB e ajuste o arquivo de configuração de conexão utilizado pelo projeto.
+4. Configure o servidor web para apontar para a pasta correta do projeto.
+5. Abra o endereço configurado no navegador e siga o fluxo de acesso do sistema.
+
+> **Importante:** os nomes do banco de dados, as credenciais e os passos finais dependem dos arquivos de configuração desta versão. Confira-os antes de iniciar o serviço.
+
+## 🖼️ Capturas de tela
 
 <div align="center">
-  <img src="https://github.com/nzp5002/MyDrive/blob/main/Screenshot_20260516_040440_Chrome.jpg?raw=true" alt="Tela de Login MyDrive" width="320"/>
+
+<img src="https://raw.githubusercontent.com/nzp5002/MyDrive/main/Screenshot_20260516_040440_Chrome.jpg" alt="Tela de login do MyDrive" width="320">
+
+*Tela de login*
+
 </div>
 
-# 🚀 Como Executar o Projeto
+## 🔒 Segurança
 
-Instale o projeto localmente seguindo os passos abaixo:
+- Não mantenha senhas padrão ou credenciais de teste em uma instalação pública.
+- Use uma senha forte para o banco de dados e para as contas do sistema.
+- Não publique arquivos de configuração, chaves de criptografia ou segredos no repositório.
+- Em produção, use HTTPS e mantenha PHP, banco de dados e servidor web atualizados.
+- Revise as permissões de arquivos e pastas; evite permissões amplas como `777`.
 
-```bash
-# Clone o repositório
-git clone https://github.com/nzp5002/MyDrive.git 
+## 🤝 Contribuições
 
-# Acesse a pasta do projeto
-cd MyDrive
+Sugestões, relatos de erros e melhorias são bem-vindos. Abra uma *issue* para descrever o problema ou envie um *pull request* com a alteração proposta.
 
+## 📄 Licença
+
+Consulte os arquivos do repositório para verificar os termos de licença aplicáveis.
+
+---
+
+<div align="center">
+
+Feito com ☁️ para facilitar o armazenamento de arquivos.
+
+</div>
