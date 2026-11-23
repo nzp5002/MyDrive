@@ -95,35 +95,6 @@ CREATE TABLE `compartilhamentos_folders` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `convites`
---
-
-CREATE TABLE `convites` (
-  `id` int(11) NOT NULL,
-  `token` varchar(255) NOT NULL,
-  `criado_por` int(11) NOT NULL,
-  `usado` tinyint(1) DEFAULT 0,
-  `expira_em` datetime NOT NULL,
-  `criado_em` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Despejando dados para a tabela `convites`
---
-
-INSERT INTO `convites` (`id`, `token`, `criado_por`, `usado`, `expira_em`, `criado_em`) VALUES
-(1, 'e11fb578ad51a3db', 1, 0, '2026-05-17 05:05:51', '2026-05-16 05:05:51'),
-(2, '1e65a7fc4cbd2ecb', 1, 0, '2026-05-17 05:18:06', '2026-05-16 05:18:06'),
-(3, 'feb8be0bd0af5f24', 1, 0, '2026-06-22 23:49:58', '2026-05-23 23:49:58'),
-(4, '7207553066452459', 1, 0, '2026-06-22 23:56:27', '2026-05-23 23:56:28'),
-(5, '213d37ad14759fe8', 1, 0, '2026-06-23 00:03:12', '2026-05-24 00:03:12'),
-(6, '399ed28c350cf898', 1, 0, '2026-06-23 00:04:40', '2026-05-24 00:04:40'),
-(7, '7fe3b6abd3531c0c', 1, 0, '2026-06-23 00:23:37', '2026-05-24 00:23:37');
-
--- --------------------------------------------------------
 
 --
 -- Estrutura para tabela `files`
